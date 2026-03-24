@@ -6,7 +6,8 @@ import './index.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
+    {/* 👈 关键修改：添加 basename，注意大小写和斜杠 */}
+    <BrowserRouter basename="/AUDIO2026">
       <App />
     </BrowserRouter>
   </StrictMode>,
