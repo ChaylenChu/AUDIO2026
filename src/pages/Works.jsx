@@ -25,7 +25,7 @@ const works = [
     type: 'Generative AI Visuals & Electronic Music',
     visualCollaborator: 'JIAJUN SHEN',
     cover: 'assets/covers/songyanyimeng.png',
-    mediaUrl:  'assets/video/songyanyimeng_web_final',
+    mediaUrl:  'assets/video/songyanyimeng_web_final.mp4',
     description: '人工智能视觉景观与电子音乐',
     about: 'Song Yan Yi Meng (Dream of the Song Eaves) is a generative audiovisual meditation on architectural memory. By digitizing the elegant curves of Song Dynasty eaves into shifting digital landscapes, the work evokes a dream-like state where history and the future coexist. It explores the interplay of light and shadow within classical structures, reconstructing the mystical elegance of traditional courtyards through a lens of contemporary abstraction.',
     tools: ['ComfyUI', 'Stable Diffusion', 'GRM Tools', 'Max/MSP'],
