@@ -6,7 +6,7 @@ import About from './About'
 
 export default function Home() {
   const location = useLocation()
-  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered, setIsHovered] = useState(false) // 用于交互
 
   const scrollToSection = (id) => {
     const el = document.getElementById(id)
@@ -25,47 +25,45 @@ export default function Home() {
   }, [location.state])
 
   return (
-    /* 核心容器：保持你最稳的初始结构 */
-    <div className="h-screen overflow-y-auto snap-y snap-mandatory bg-black scroll-smooth">
+    /* 保持你最开始的父级结构，完全不动 */
+    <div className="h-screen overflow-y-auto snap-y snap-mandatory bg-black">
       
-      {/* --- Section 1: Hero --- */}
+      {/* --- Hero Section --- */}
       <section 
         className="relative h-screen snap-start flex flex-col justify-center bg-black overflow-hidden px-8 sm:px-16 md:px-24 lg:px-32"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         
-        {/* 🚀 图片背景层：调整为 60vh 比例，居中对齐 */}
+        {/* 🚀 插入图片层：使用 absolute 确保它不占任何空间，不撑开高度 */}
         <div className="absolute inset-0 z-0 flex justify-end items-center pointer-events-none">
-          <div 
-            className="w-full md:w-[65%] overflow-hidden transition-all duration-1000 ease-in-out"
-            style={{ 
-              height: '60vh', // 👈 这里控制照片的上下长短比例
-              opacity: isHovered ? 0.9 : 0.7 
-            }}
-          > 
+          <div className="h-full w-full md:w-[60%] overflow-hidden"> 
             <img 
               src="assets/covers/hero.jpg" 
               alt="Hero" 
-              className="h-full w-full object-cover transition-transform duration-1000"
+              className="h-full w-full object-cover transition-all duration-1000 ease-out"
               style={{
                 objectPosition: 'right center',
-                filter: isHovered ? 'brightness(1.1) saturate(1.1)' : 'brightness(1) saturate(0.9)',
-                transform: isHovered ? 'scale(1.03)' : 'scale(1)'
+                // 这里的滤镜组合是为了保证“温润”不黑
+                filter: isHovered 
+                  ? 'saturate(1) brightness(1.05) contrast(1)' 
+                  : 'saturate(0.9) brightness(1) contrast(1)',
+                opacity: 0.9,
+                transform: isHovered ? 'scale(1.02)' : 'scale(1)'
               }}
             />
           </div>
         </div>
 
-        {/* 🚀 黑色渐变遮罩：确保左侧文字清晰，图片边界柔和 */}
+        {/* 🚀 插入遮罩层：让图片左侧和黑色背景完美融合 */}
         <div 
           className="absolute inset-0 z-[1] pointer-events-none"
           style={{
-            background: 'linear-gradient(to right, #000 0%, #000 35%, transparent 90%)'
+            background: 'linear-gradient(to right, #000 0%, #000 30%, transparent 85%)'
           }}
         />
 
-        {/* 文字内容层 */}
+        {/* 保持你最开始的文字内容结构，只把 z-index 提上来 */}
         <div className="relative z-10 max-w-6xl mx-auto w-full">
           <div className="max-w-xl">
             <h1 className="text-[clamp(3rem,10vw,7rem)] font-extralight leading-[1.04] tracking-tight text-white">
@@ -89,24 +87,25 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- Section 2: Works --- */}
+      {/* --- Works Section --- 保持你原来的样子 */}
       <section
         id="works-section"
-        className="snap-start h-screen overflow-y-auto bg-black"
+        className="snap-start h-screen overflow-y-auto"
       >
         <Works />
       </section>
 
-      {/* --- Section 3: About --- */}
+      {/* --- About Section --- 保持你原来的样子 */}
       <section
         id="about-section"
-        className="snap-start h-screen flex items-center justify-center bg-black"
+        className="snap-start h-screen"
       >
-        <div className="w-full max-w-3xl px-8 max-h-[85vh] overflow-y-auto scrollbar-hide">
-          <About />
+        <div className="h-full flex items-center justify-center px-5 sm:px-8 md:px-12">
+          <div className="w-full max-w-3xl max-h-[80vh] overflow-y-auto">
+            <About />
+          </div>
         </div>
       </section>
-
     </div>
   )
 }
